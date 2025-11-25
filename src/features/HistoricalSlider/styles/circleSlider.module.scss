@@ -1,0 +1,45 @@
+.root {
+  width: 90%;
+  height: 57%;
+  position: absolute;
+  top: 16%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $color-black-blue-10;
+}
+
+.circle {
+  width: 536px;
+  height: 530px;
+  border-radius: 50%;
+  border: 1px solid $color-black-blue-10;
+}
+
+.date {
+  font-weight: bold;
+  font-size: 200px;
+  letter-spacing: -4px;
+  line-height: 160px;
+}
+
+.firstDate {
+  color: $color-violet;
+  position: absolute;
+  left: 28%;
+  top: 39%;
+  width: max-content;
+  transform: translateX(-50%);
+}
+
+.secondDate {
+  position: absolute;
+  left: 69%;
+  top: 39%;
+  width: max-content;
+  transform: translateX(-50%);
+  color: $color-pink;
+}
+

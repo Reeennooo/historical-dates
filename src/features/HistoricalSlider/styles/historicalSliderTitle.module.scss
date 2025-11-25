@@ -1,0 +1,25 @@
+.root {
+  position: absolute;
+  left: 0;
+  top: 170px;
+  padding-left: 78px;
+
+  &::before {
+    position: absolute;
+    content: "";
+    display: block;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 5px;
+    background: linear-gradient(180deg, $color-violet 0%, $color-pink 100%);
+  }
+}
+
+.title {
+  font-size: 56px;
+  font-weight: 600;
+  line-height: 120%;
+  color: $color-black-blue;
+  white-space: pre-wrap;
+}

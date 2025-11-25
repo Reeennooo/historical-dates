@@ -12,6 +12,7 @@ module.exports = {
     extensions: [".tsx", ".ts", ".js", ".jsx"],
     alias: {
       "@shared": path.resolve(__dirname, "src/shared/"),
+      "@features": path.resolve(__dirname, "src/features/"),
       "@app": path.resolve(__dirname, "src/app/"),
     },
   },
@@ -25,7 +26,10 @@ module.exports = {
       {
         test: /\.module\.s[ac]ss$/,
         use: [
-          "style-loader",
+          {
+            loader: "style-loader",
+            options: { injectType: "styleTag" }
+          },
           {
             loader: "css-loader",
             options: {
@@ -74,6 +78,13 @@ module.exports = {
     static: "./dist",
     port: 3000,
     hot: true,
+    liveReload: true,
+    client: {
+      overlay: true,
+    },
+    watchFiles: [
+      "src/shared/**.*"
+    ],
   },
   mode: "development",
 };

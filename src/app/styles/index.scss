@@ -1,4 +1,7 @@
+@use "fonts";
+
 /* --- CSS Reset --- */
+
 *,
 *::before,
 *::after {
@@ -9,7 +12,7 @@
 
 html, body {
     height: 100%;
-    font-family: sans-serif;
+    font-family: "PT Sans", sans-serif;
     background: #fff;
     color: #000;
     line-height: 1.5;
