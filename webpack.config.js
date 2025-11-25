@@ -1,0 +1,80 @@
+const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+
+module.exports = {
+  entry: "./src/app/index.tsx",
+  output: {
+    path: path.resolve(__dirname, "dist"),
+    filename: "bundle.js",
+    clean: true,
+  },
+  resolve: {
+    extensions: [".tsx", ".ts", ".js", ".jsx"],
+    alias: {
+      "@shared": path.resolve(__dirname, "src/shared/"),
+      "@app": path.resolve(__dirname, "src/app/"),
+    },
+  },
+  module: {
+    rules: [
+      {
+        test: /\.(ts|tsx|js|jsx)$/,
+        exclude: /node_modules/,
+        use: "ts-loader",
+      },
+      {
+        test: /\.module\.s[ac]ss$/,
+        use: [
+          "style-loader",
+          {
+            loader: "css-loader",
+            options: {
+              modules: {
+                localIdentName: "[name]__[local]___[hash:base64:5]",
+              },
+              esModule: false,
+            },
+          },
+          "sass-loader",
+          {
+            loader: "sass-resources-loader",
+            options: {
+              resources: path.resolve(__dirname, "src/app/styles/variables.scss"),
+            },
+          },
+        ],
+      },
+      {
+        test: /\.s[ac]ss$/,
+        exclude: /\.module\.s[ac]ss$/,
+        use: [
+          "style-loader",
+          "css-loader",
+          "sass-loader",
+          {
+            loader: "sass-resources-loader",
+            options: {
+              resources: path.resolve(__dirname, "src/app/styles/variables.scss"),
+            },
+          },
+        ],
+      },
+      {
+        test: /\.css$/,
+        use: ["style-loader", "css-loader"],
+      },
+    ],
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: "./public/index.html",
+    }),
+  ],
+  devServer: {
+    static: "./dist",
+    port: 3000,
+    hot: true,
+  },
+  mode: "development",
+};
+
