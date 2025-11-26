@@ -1,3 +1,22 @@
+@use "@mixins" as *;
+
+@keyframes shake {
+  0%   { transform: translateX(-50%) translateX(0); }
+  20%  { transform: translateX(-50%) translateX(-5px); }
+  40%  { transform: translateX(-50%) translateX(5px); }
+  60%  { transform: translateX(-50%) translateX(-5px); }
+  80%  { transform: translateX(-50%) translateX(5px); }
+  100% { transform: translateX(-50%) translateX(0); }
+}
+
+.shake {
+  animation: shake 0.5s ease-in-out;
+}
+
+:root {
+  --circle-rotation-duration: 0.8s;
+}
+
 .root {
   width: 90%;
   height: 57%;
@@ -12,17 +31,22 @@
 }
 
 .circle {
-  width: 536px;
+  position: relative;
+  width: 530px;
   height: 530px;
   border-radius: 50%;
   border: 1px solid $color-black-blue-10;
 }
 
-.date {
-  font-weight: bold;
-  font-size: 200px;
-  letter-spacing: -4px;
-  line-height: 160px;
+.pointsWrapper {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform-origin: center center;
+  @include transition((transform), var(--circle-rotation-duration));
 }
 
 .firstDate {
@@ -43,3 +67,89 @@
   color: $color-pink;
 }
 
+.hiddenSwiper {
+  display: none;
+}
+
+.circlePoint {
+  position: absolute;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  @include transition((transform));
+
+  &::before {
+    content: "";
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 6px;
+    height: 6px;
+    border-radius: inherit;
+    transform: translate(-50%, -50%);
+    background-color: $color-black-blue;
+    border: 1px solid $color-black-blue-30;
+    @include transition((background-color, width, height))
+  }
+
+  &:hover {
+    &::before {
+      width: 56px;
+      height: 56px;
+      background-color: $color-background;
+    }
+
+    .pointNumber {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+
+  &.showText {
+    .pointName {
+      opacity: 1;
+    }
+  }
+
+  &.active {
+    &::before {
+      width: 56px;
+      height: 56px;
+      background-color: $color-background;
+    }
+
+    .pointNumber {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+}
+
+.pointNumber {
+  color: $color-black-blue;
+  font-size: 20px;
+  line-height: 30px;
+  transform: scale(0.1);
+  opacity: 0;
+  @include transition((transform, opacity));
+}
+
+.pointName {
+  position: absolute;
+  top: 50%;
+  left: 115%;
+  transform: translate(0, -50%);
+  font-size: 20px;
+  line-height: 30px;
+  font-weight: 600;
+  color: $color-black-blue;
+  white-space: nowrap;
+  opacity: 0;
+  //@include transition((opacity));
+}

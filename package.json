@@ -1,7 +1,8 @@
 {
   "dependencies": {
     "react": "^19.2.0",
-    "react-dom": "^19.2.0"
+    "react-dom": "^19.2.0",
+    "swiper": "11.2.6"
   },
   "scripts": {
     "start": "webpack serve --open",
@@ -12,10 +13,12 @@
     "@babel/plugin-transform-react-jsx": "^7.27.1",
     "@babel/preset-env": "^7.28.5",
     "@babel/preset-react": "^7.28.5",
+    "@svgr/webpack": "^8.1.0",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
     "babel-loader": "^10.0.0",
     "css-loader": "^7.1.2",
+    "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.6.5",
     "sass": "^1.94.2",
     "sass-loader": "^16.0.6",

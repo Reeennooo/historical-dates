@@ -14,6 +14,9 @@ module.exports = {
       "@shared": path.resolve(__dirname, "src/shared/"),
       "@features": path.resolve(__dirname, "src/features/"),
       "@app": path.resolve(__dirname, "src/app/"),
+      // styles
+      "@mixins": path.resolve(__dirname, "src/app/styles/mixins.scss"),
+      "@animations": path.resolve(__dirname, "src/app/styles/animations.scss"),
     },
   },
   module: {
@@ -66,6 +69,18 @@ module.exports = {
       {
         test: /\.css$/,
         use: ["style-loader", "css-loader"],
+      },
+      {
+        test: /\.svg$/i,
+        include: path.resolve(__dirname, 'src/shared/assets/icons'),
+        issuer: /\.[jt]sx?$/,
+        use: ['@svgr/webpack'],
+      },
+      // Остальные изображения
+      {
+        test: /\.(png|jpe?g|gif|svg)$/i,
+        type: 'asset/resource',
+        exclude: path.resolve(__dirname, 'src/shared/assets/icons'),
       },
     ],
   },
