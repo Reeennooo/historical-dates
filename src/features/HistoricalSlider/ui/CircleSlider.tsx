@@ -6,6 +6,7 @@ import {Swiper, SwiperSlide} from 'swiper/react';
 import {getRotationDuration} from '@features/HistoricalSlider/lib/getRotationDuration';
 import {AnimatedNumber} from '@features/HistoricalSlider/ui/AnimatedNumber';
 import { Navigation, Pagination } from 'swiper/modules';
+import {CircleButton} from '@shared/ui/CircleButton';
 
 interface Props {
   slides: Slide[]
@@ -16,6 +17,8 @@ export const CircleSlider: FC<Props> = memo((props) => {
   const swiperRef = useRef<SwiperType>(null);
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const duration = getRotationDuration();
+  const disablePrevButton = currentSlideIndex === 0;
+  const disableNextButton = currentSlideIndex === slides.length - 1;
 
   // Circle
   const circleRef = useRef<HTMLDivElement>(null);
@@ -29,12 +32,9 @@ export const CircleSlider: FC<Props> = memo((props) => {
   const [showPointText, setShowPointText] = useState<boolean>(true);
   const [shakeDate, setShakeDate] = useState<boolean>(false);
 
-  const onClickCirclePoint = useCallback((event: MouseEvent<HTMLDivElement>) => {
+  const handleSlideChangeByIndex = useCallback((index: number) => {
     setShowPointText(false);
     setShakeDate(true);
-    const dataId = Number(event.currentTarget.dataset.id);
-    const index = slides.findIndex(el => el.id === dataId);
-    swiperRef.current?.slideTo(index);
     const anglePoint = angleStart + index * angleStep;
     const targetRotation = angleStart - anglePoint;
     setRotation(targetRotation);
@@ -42,14 +42,32 @@ export const CircleSlider: FC<Props> = memo((props) => {
     setTimeout(() => {
       setShowPointText(true);
       setShakeDate(false);
-    }, duration)
+    }, duration);
 
-  }, [
-    slides,
-    duration,
-    angleStart,
-    angleStep
-  ])
+  }, [angleStart, angleStep, duration]);
+
+  const onClickCirclePoint = useCallback((event: MouseEvent<HTMLDivElement>) => {
+    const dataId = Number(event.currentTarget.dataset.id);
+    const index = slides.findIndex(el => el.id === dataId);
+    swiperRef.current?.slideTo(index)
+  }, [slides, handleSlideChangeByIndex]);
+
+
+  const onClickPrevButton = useCallback(() => {
+    if (!swiperRef.current) return;
+    const prevIndex = Math.max(currentSlideIndex - 1, 0);
+    swiperRef.current.slideTo(prevIndex);
+  }, [currentSlideIndex]);
+
+  const onClickNextButton = useCallback(() => {
+    if (!swiperRef.current) return;
+    const nextIndex = Math.min(currentSlideIndex + 1, slides.length - 1);
+    swiperRef.current.slideTo(nextIndex);
+  }, [currentSlideIndex, slides.length]);
+
+  useEffect(() => {
+    handleSlideChangeByIndex(currentSlideIndex);
+  }, [currentSlideIndex, handleSlideChangeByIndex]);
 
   useEffect(() => {
     if (circleRef.current) {
@@ -63,17 +81,37 @@ export const CircleSlider: FC<Props> = memo((props) => {
   return (
     <div className={styles.root}>
       <Swiper
+        loop={false}
         modules={[Navigation, Pagination]}
         onSwiper={swiper => (swiperRef.current = swiper)}
         allowTouchMove={false}
         slidesPerView={1}
         className={styles.hiddenSwiper}
         onSlideChange={swiper => setCurrentSlideIndex(swiper.activeIndex)}
-        // navigation={}
       >
-        {slides.map(el => <SwiperSlide/>)}
+        {slides.map(el => <SwiperSlide key={el.id} />)}
       </Swiper>
-
+      <div className={styles.control}>
+        <div className={styles.counter}>
+          {`0${currentSlideIndex + 1}`}/{`0${slides.length}`}
+        </div>
+        <div className={styles.navigation}>
+          <CircleButton
+            size={'medium'}
+            style={'transparent'}
+            icon={'chevron-left'}
+            onClick={onClickPrevButton}
+            disabled={disablePrevButton}
+          />
+          <CircleButton
+            size={'medium'}
+            style={'transparent'}
+            icon={'chevron-right'}
+            onClick={onClickNextButton}
+            disabled={disableNextButton}
+          />
+        </div>
+      </div>
 
       <div className={styles.circle} ref={circleRef}>
         <div
@@ -89,10 +127,9 @@ export const CircleSlider: FC<Props> = memo((props) => {
           const x = center.x + radius * Math.cos(rad);
           const y = center.y + radius * Math.sin(rad);
 
-          console.log(angle);
-
           return (
             <div
+              key={el.id}
               data-id={el.id}
               onClick={onClickCirclePoint}
               className={`

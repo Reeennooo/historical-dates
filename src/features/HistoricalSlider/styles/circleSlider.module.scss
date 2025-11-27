@@ -27,7 +27,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: $color-black-blue-10;
 }
 
 .circle {
@@ -36,6 +35,25 @@
   height: 530px;
   border-radius: 50%;
   border: 1px solid $color-black-blue-10;
+}
+
+.control {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+
+.counter {
+  color: $color-black-blue;
+  font-size: 14px;
+  letter-spacing: 0;
+  margin-bottom: 20px;
+}
+
+.navigation {
+  display: flex;
+  align-items: center;
+  column-gap: 20px;
 }
 
 .pointsWrapper {
@@ -151,5 +169,5 @@
   color: $color-black-blue;
   white-space: nowrap;
   opacity: 0;
-  //@include transition((opacity));
+  pointer-events: none;
 }

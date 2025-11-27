@@ -4,21 +4,25 @@ import styles from './circleButton.module.scss'
 
 interface Props {
   size: 'small' | 'medium';
-  style: 'transparent' | 'white';
+  style: 'transparent' | 'standard';
   className?: string;
-  icon: IconList
+  icon: IconList;
+  onClick?: () => void;
+  disabled?: boolean;
 }
 
 export const CircleButton: FC<Props> = memo((props) => {
-  const {icon, size, style} = props;
+  const {icon, size, style, onClick, disabled} = props;
 
   return (
     <button
       className={`
-        ${styles.root}
+        ${styles.button}
         ${styles[style]}
         ${styles[size]}
+        ${disabled ? styles.disabled : ''}
       `}
+      onClick={onClick}
     >
       <Icon name={icon} />
     </button>

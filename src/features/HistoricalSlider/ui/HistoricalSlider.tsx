@@ -4,7 +4,6 @@ import styles from '../styles/historicalSlider.module.scss';
 import {HistoricalSliderTitle} from '@features/HistoricalSlider/ui/HistoricalSliderTitle';
 import {CircleSlider} from '@features/HistoricalSlider/ui/CircleSlider';
 import {Slide} from '@features/HistoricalSlider/model/slider.model';
-import {Icon} from '@shared/ui/Icon/Icon';
 
 interface Props {
   slides: Slide[]
