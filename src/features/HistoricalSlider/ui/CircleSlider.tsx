@@ -9,11 +9,12 @@ import { Navigation, Pagination } from 'swiper/modules';
 import {CircleButton} from '@shared/ui/CircleButton';
 
 interface Props {
-  slides: Slide[]
+  slides: Slide[];
+  onChangeSlideCallback: (slideId: number) => void;
 }
 
 export const CircleSlider: FC<Props> = memo((props) => {
-  const {slides} = props;
+  const {slides, onChangeSlideCallback} = props;
   const swiperRef = useRef<SwiperType>(null);
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const duration = getRotationDuration();
@@ -67,7 +68,12 @@ export const CircleSlider: FC<Props> = memo((props) => {
 
   useEffect(() => {
     handleSlideChangeByIndex(currentSlideIndex);
-  }, [currentSlideIndex, handleSlideChangeByIndex]);
+    onChangeSlideCallback(slides[currentSlideIndex].id);
+  }, [
+    currentSlideIndex,
+    onChangeSlideCallback,
+    handleSlideChangeByIndex
+  ]);
 
   useEffect(() => {
     if (circleRef.current) {

@@ -9,11 +9,21 @@
   &.small {
     width: 40px;
     height: 40px;
+
+    svg {
+      width: 7px;
+      height: 12px;
+    }
   }
 
   &.medium {
     width: 50px;
     height: 50px;
+
+    svg {
+      width: 9.25px;
+      height: 15.5px;
+    }
   }
 
   // styles
@@ -22,12 +32,14 @@
     border: 1px solid $color-black-blue-50;
 
     svg {
-      stroke: $color-black-blue
+
+      stroke: $color-black-blue;
     }
   }
 
-  &.standard {
-    background-color: $color-background;
+  &.white {
+    background-color: $color-white;
+    box-shadow: 0 0px 15px $color-blue-10;
 
     svg {
       stroke: $color-blue;

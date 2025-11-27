@@ -6,13 +6,13 @@ export type IconList =
   | 'chevron-right'
   | 'chevron-left'
 
-interface IProps {
+interface IconProps {
   name: IconList;
   properties?: SVGAttributes<unknown>;
 }
 
 
-export const Icon: FC<IProps> = memo(function Icon(props) {
+export const Icon: FC<IconProps> = memo(function Icon(props) {
   const { name, properties = {} } = props;
 
 

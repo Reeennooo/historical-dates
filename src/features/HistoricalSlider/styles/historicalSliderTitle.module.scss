@@ -2,7 +2,7 @@
   position: absolute;
   left: 0;
   top: 170px;
-  padding-left: 78px;
+  padding-left: $historicalSliderSidePadding;
 
   &::before {
     position: absolute;

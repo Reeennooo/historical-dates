@@ -2,17 +2,17 @@ import React, {FC, memo} from 'react';
 import {Icon, IconList} from '@shared/ui/Icon/Icon';
 import styles from './circleButton.module.scss'
 
-interface Props {
+interface CircleButtonProps {
   size: 'small' | 'medium';
-  style: 'transparent' | 'standard';
+  style: 'transparent' | 'white';
   className?: string;
   icon: IconList;
   onClick?: () => void;
   disabled?: boolean;
 }
 
-export const CircleButton: FC<Props> = memo((props) => {
-  const {icon, size, style, onClick, disabled} = props;
+export const CircleButton: FC<CircleButtonProps> = memo((props) => {
+  const {icon, size, style, onClick, disabled, className} = props;
 
   return (
     <button
@@ -21,6 +21,7 @@ export const CircleButton: FC<Props> = memo((props) => {
         ${styles[style]}
         ${styles[size]}
         ${disabled ? styles.disabled : ''}
+        ${className}
       `}
       onClick={onClick}
     >

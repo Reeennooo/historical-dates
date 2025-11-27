@@ -12,7 +12,7 @@
     "paths": {
       "@shared/*": ["shared/*"],
       "@features/*": ["features/*"],
-      "@app/*": ["app/*"]
+      "@app/*": ["app/*"],
     }
   },
   "include": ["src"]

@@ -17,6 +17,7 @@ module.exports = {
       // styles
       "@mixins": path.resolve(__dirname, "src/app/styles/mixins.scss"),
       "@animations": path.resolve(__dirname, "src/app/styles/animations.scss"),
+      "@fonts": path.resolve(__dirname, "src/app/styles/fonts.scss"),
     },
   },
   module: {
