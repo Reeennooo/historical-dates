@@ -66,7 +66,7 @@ npm run start
 ### Билд
 
 ```bash
-npm run start
+npm run build
 ```
 
 
