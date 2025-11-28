@@ -5,6 +5,8 @@ import { Navigation, Pagination } from 'swiper/modules';
 import styles from '../styles/horizontalSlider.module.scss';
 import {Swiper as SwiperType} from 'swiper';
 import {CircleButton} from '@shared/ui/CircleButton';
+import {useWindowWidth} from '@shared/hooks/useWindowWidth';
+import {useBreakpoints} from '@shared/hooks/useBreakPoints';
 
 interface HorizontalSliderProps {
   slideId: number
@@ -16,6 +18,8 @@ export const HorizontalSlider: FC<HorizontalSliderProps> = memo((props) => {
   const swiperRef = useRef<SwiperType>(null);
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const [hideNextButton, setHideNextButton] = useState(false);
+  const breakpoints = useBreakpoints();
+  const windowWidth = useWindowWidth();
 
   useEffect(() => {
     const data = slides.find(el => el.id === slideId)?.events;
@@ -56,7 +60,7 @@ export const HorizontalSlider: FC<HorizontalSliderProps> = memo((props) => {
         loop={false}
         modules={[Navigation, Pagination]}
         slidesPerView={'auto'}
-        spaceBetween={80}
+        spaceBetween={windowWidth < breakpoints.tablet ? 25 : 80}
         onSwiper={swiper => (swiperRef.current = swiper)}
         onSlideChange={swiper => setCurrentSlideIndex(swiper.activeIndex)}
       >

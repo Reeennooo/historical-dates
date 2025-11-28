@@ -16,6 +16,7 @@ html, body {
     background: #fff;
     color: #000;
     line-height: 1.5;
+    overflow-x: hidden;
 }
 
 img, picture, video, canvas, svg {
@@ -45,4 +46,14 @@ button {
 table {
     border-collapse: collapse;
     border-spacing: 0;
+}
+
+:root {
+    // Breakpoints
+    --mobile: 480px;
+    --tablet: 768px;
+    --laptop: 1024px;
+    --desktop: 1280px;
+    --wide: 1440px;
+    --desktop-xl: 1900px;
 }

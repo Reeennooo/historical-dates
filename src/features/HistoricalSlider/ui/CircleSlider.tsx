@@ -1,12 +1,14 @@
-import {memo, useCallback, useRef, useState, MouseEvent, useEffect, FC} from 'react';
+import {memo, useCallback, useRef, useState, MouseEvent, useEffect, FC, useMemo} from 'react';
 import styles from '../styles/circleSlider.module.scss'
 import {Slide} from '@features/HistoricalSlider/model/slider.model';
 import { Swiper as SwiperType } from "swiper";
 import {Swiper, SwiperSlide} from 'swiper/react';
 import {getRotationDuration} from '@features/HistoricalSlider/lib/getRotationDuration';
-import {AnimatedNumber} from '@features/HistoricalSlider/ui/AnimatedNumber';
+import {AnimatedNumber} from '@shared/ui/AnimatedNumber';
 import { Navigation, Pagination } from 'swiper/modules';
 import {CircleButton} from '@shared/ui/CircleButton';
+import {useWindowWidth} from '@shared/hooks/useWindowWidth';
+import {useBreakpoints} from '@shared/hooks/useBreakPoints';
 
 interface Props {
   slides: Slide[];
@@ -20,6 +22,16 @@ export const CircleSlider: FC<Props> = memo((props) => {
   const duration = getRotationDuration();
   const disablePrevButton = currentSlideIndex === 0;
   const disableNextButton = currentSlideIndex === slides.length - 1;
+  const windowWidth = useWindowWidth();
+  const breakpoints = useBreakpoints();
+  const device = useMemo(() => {
+    if (windowWidth <= breakpoints.desktop) {
+      return 'desktop'
+    }
+    return 'desktop-xl'
+  }, [
+    windowWidth
+  ])
 
   // Circle
   const circleRef = useRef<HTMLDivElement>(null);
@@ -82,7 +94,9 @@ export const CircleSlider: FC<Props> = memo((props) => {
       setCenter({ x: rect.width / 2, y: rect.height / 2 });
       setRadius(r);
     }
-  }, []);
+  }, [
+    device
+  ]);
   
   return (
     <div className={styles.root}>
@@ -170,6 +184,7 @@ export const CircleSlider: FC<Props> = memo((props) => {
           duration={duration}
           className={`
               ${shakeDate ? styles.shake : ''}
+              ${styles.date}
               ${styles.firstDate}
             `}
         />
@@ -178,12 +193,10 @@ export const CircleSlider: FC<Props> = memo((props) => {
           duration={duration}
           className={`
               ${shakeDate ? styles.shake : ''}
+              ${styles.date}
               ${styles.secondDate}
             `}
         />
-      <div className={styles.navigation}>
-
-      </div>
     </div>
   );
 });

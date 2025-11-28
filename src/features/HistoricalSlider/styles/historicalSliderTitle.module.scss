@@ -23,3 +23,39 @@
   color: $color-black-blue;
   white-space: pre-wrap;
 }
+
+@media (max-width: $laptop) {
+  .root {
+    padding-left: $historicalSliderSidePaddingSmall;
+  }
+  .title {
+    font-size: 46px;
+    font-weight: 600;
+    line-height: 120%;
+  }
+}
+
+@media (max-width: $tablet) {
+  .root {
+    top: 70px;
+    left: $historicalSliderSidePaddingSmall;
+    padding-left: 0;
+
+    &::before {
+      display: none;
+    }
+  }
+  .title {
+    font-size: 30px;
+  }
+}
+
+@media (max-width: $mobile) {
+  .root {
+    top: 59px;
+  }
+  .title {
+    font-size: 20px;
+  }
+}
+

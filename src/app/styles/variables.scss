@@ -4,6 +4,7 @@ $color-violet: #5D5FEF;
 $color-pink: #EF5DA8;
 $color-blue: #3877EE;
 $color-black-blue: #42567A;
+$color-gray: #C7CDD9;
 
 $color-background: #FFFFFF;
 
@@ -17,3 +18,12 @@ $color-black-blue-50: rgba($color-black-blue, 0.5);
 
 $container-max-width: 1440px;
 $historicalSliderSidePadding: 78px;
+$historicalSliderSidePaddingSmall: 20px;
+
+// Breakpoints
+$mobile: 480px;
+$tablet: 768px;
+$laptop: 1024px;
+$desktop: 1280px;
+$wide: 1440px;
+$desktop-xl: 1900px;

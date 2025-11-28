@@ -1,6 +1,13 @@
 .root {
   width: 100%;
   max-width: $container-max-width;
-  margin-left: 320px;
+  margin-left: auto;
   margin-right: 160px;
+}
+
+@media (max-width: $desktop-xl) {
+  .root {
+    margin-left: auto;
+    margin-right: auto;
+  }
 }

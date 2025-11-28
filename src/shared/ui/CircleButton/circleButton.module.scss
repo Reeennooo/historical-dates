@@ -5,25 +5,20 @@
   justify-content: center;
   cursor: pointer;
 
+  svg {
+    width: 50%;
+    height: 50%;
+  }
+
   // sizes
   &.small {
     width: 40px;
     height: 40px;
-
-    svg {
-      width: 7px;
-      height: 12px;
-    }
   }
 
   &.medium {
     width: 50px;
     height: 50px;
-
-    svg {
-      width: 9.25px;
-      height: 15.5px;
-    }
   }
 
   // styles
@@ -33,7 +28,7 @@
 
     svg {
 
-      stroke: $color-black-blue;
+      fill: $color-black-blue;
     }
   }
 
@@ -42,13 +37,22 @@
     box-shadow: 0 0px 15px $color-blue-10;
 
     svg {
-      stroke: $color-blue;
+      fill: $color-blue;
     }
   }
 
   &.disabled {
     opacity: 0.5;
     pointer-events: none;
+  }
+}
+
+@media (max-width: $mobile) {
+  .button {
+    &.medium {
+      width: 25px;
+      height: 25px;
+    }
   }
 }
 

@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import styles from '../styles/animatedNumber.module.scss'
 
 interface AnimatedNumberProps {
   value: number;
@@ -32,7 +31,6 @@ export const AnimatedNumber =  (props: AnimatedNumberProps) => {
 
   return (
     <span className={`
-      ${styles.root}
       ${className}
     `}>
       {display}

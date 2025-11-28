@@ -17,7 +17,7 @@ module.exports = {
       // styles
       "@mixins": path.resolve(__dirname, "src/app/styles/mixins.scss"),
       "@animations": path.resolve(__dirname, "src/app/styles/animations.scss"),
-      "@fonts": path.resolve(__dirname, "src/app/styles/fonts.scss"),
+      "@fonts": path.resolve(__dirname, "src/app/fonts")
     },
   },
   module: {
@@ -26,6 +26,13 @@ module.exports = {
         test: /\.(ts|tsx|js|jsx)$/,
         exclude: /node_modules/,
         use: "ts-loader",
+      },
+      {
+        test: /\.(woff(2)?|ttf|eot|otf)$/,
+        type: 'asset/resource',
+        generator: {
+          filename: 'fonts/[name][ext][query]'
+        }
       },
       {
         test: /\.module\.s[ac]ss$/,

@@ -1,5 +1,11 @@
 @use "@mixins" as *;
 
+@font-face {
+  font-family: "Bebas Neue";
+  src: url("~@fonts/BebasNeue/BebasNeue-Regular.ttf") format("truetype");
+  font-weight: 400;
+}
+
 .root {
   position: absolute;
   bottom: 104px;
@@ -10,10 +16,9 @@
 }
 
 .slide {
-  width: max-content;
   width: 320px;
 
-  .slide:nth-child(even) {
+  &:nth-child(even) {
     width: 400px;
   }
 }
@@ -77,5 +82,74 @@
   }
 }
 
+@media (max-width: $laptop) {
+  .root {
+    padding: 0 calc($historicalSliderSidePaddingSmall + 20px) 0 $historicalSliderSidePaddingSmall;
+  }
+}
 
+@media (max-height: $laptop) {
+  .root {
+    bottom: 50px;
+  }
+}
 
+@media (max-width: $tablet) {
+  .root {
+    height: 150px;
+    bottom: 141px;
+    padding: $historicalSliderSidePaddingSmall 0 0;
+
+    &::before {
+      content: "";
+      display: block;
+      width: calc(100% - 2*$historicalSliderSidePaddingSmall);
+      height: 2px;
+      background-color: $color-gray;
+      position: absolute;
+      top: -20px;
+      left: $historicalSliderSidePaddingSmall;
+    }
+
+    :global(.swiper) {
+      padding: 0 $historicalSliderSidePaddingSmall;
+    }
+  }
+
+  .prevButton {
+    display: none;
+  }
+
+  .nextButton {
+    display: none;
+  }
+}
+
+@media (max-width: $mobile) {
+  .root {
+    height: 134px;
+
+    &::before {
+      top: 0;
+    }
+  }
+
+  .slideTitle {
+    font-size: 16px;
+    line-height: 120%;
+  }
+
+  .slideText {
+    font-size: 14px;
+    line-height: 145%;
+    -webkit-line-clamp: 4;
+  }
+
+  .slide {
+    width: 166px;
+
+    &:nth-child(even) {
+      width: 255px;
+    }
+  }
+}
