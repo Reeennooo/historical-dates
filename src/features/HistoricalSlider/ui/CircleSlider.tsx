@@ -197,6 +197,19 @@ export const CircleSlider: FC<Props> = memo((props) => {
               ${styles.secondDate}
             `}
         />
+      <div className={styles.tabulation}>
+        {slides.map((el, i) => (
+          <div
+            key={el.id}
+            data-id={el.id}
+            className={`
+              ${styles.tab}
+              ${i === currentSlideIndex ? styles.active : ''}
+            `}
+            onClick={onClickCirclePoint}
+          />
+        ))}
+      </div>
     </div>
   );
 });

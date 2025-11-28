@@ -51,6 +51,28 @@
   margin-bottom: 20px;
 }
 
+.tabulation {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  column-gap: 10px;
+}
+
+.tab {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: $color-gray;
+
+  &.active {
+    background-color: $color-black-blue;
+  }
+}
+
 .navigation {
   display: flex;
   align-items: center;
@@ -250,6 +272,10 @@
 
   .counter {
     margin-bottom: 10px;
+  }
+
+  .tabulation {
+    display: flex;
   }
 
   .circle {
