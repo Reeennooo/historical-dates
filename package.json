@@ -1,4 +1,5 @@
 {
+  "homepage": "https://Reeennooo.github.io/historical-dates/",
   "dependencies": {
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
@@ -6,7 +7,9 @@
   },
   "scripts": {
     "start": "webpack serve --open",
-    "build": "webpack"
+    "build": "webpack",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "devDependencies": {
     "@babel/core": "^7.28.5",
@@ -19,6 +22,7 @@
     "babel-loader": "^10.0.0",
     "css-loader": "^7.1.2",
     "file-loader": "^6.2.0",
+    "gh-pages": "^6.3.0",
     "html-webpack-plugin": "^5.6.5",
     "sass": "^1.94.2",
     "sass-loader": "^16.0.6",
