@@ -1,1 +1,0 @@
-export {HistoricalSlider} from './ui/HistoricalSlider';
